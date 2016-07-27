@@ -1,0 +1,28 @@
+# OASIS_START
+# DO NOT EDIT (digest: 0dbfb8fdc297861b4782cb9cf8ac2e58)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library qjsengine
+"src/qjsengine.cmxs": use_qjsengine
+<src/*.ml{,i,y}>: oasis_library_qjsengine_ccopt
+"src/qjsengine_stubs.c": oasis_library_qjsengine_ccopt
+<src/qjsengine.{cma,cmxa}>: oasis_library_qjsengine_byte
+<src/*.ml{,i,y}>: oasis_library_qjsengine_byte
+"src/qjsengine_stubs.c": oasis_library_qjsengine_byte
+<src/qjsengine.{cma,cmxa}>: oasis_library_qjsengine_native
+<src/*.ml{,i,y}>: oasis_library_qjsengine_native
+"src/qjsengine_stubs.c": oasis_library_qjsengine_native
+<src/qjsengine.{cma,cmxa}>: use_libqjsengine_stubs
+# OASIS_STOP

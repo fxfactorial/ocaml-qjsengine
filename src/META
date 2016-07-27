@@ -1,0 +1,11 @@
+# OASIS_START
+# DO NOT EDIT (digest: 028d0f23a051a48015ce192872eafc10)
+version = "0.0.1"
+description = "OCaml bindings to QJSEngine"
+archive(byte) = "qjsengine.cma"
+archive(byte, plugin) = "qjsengine.cma"
+archive(native) = "qjsengine.cmxa"
+archive(native, plugin) = "qjsengine.cmxs"
+exists_if = "qjsengine.cma"
+# OASIS_STOP
+
