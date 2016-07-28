@@ -10,22 +10,25 @@ module Bindings = struct
 
   external evaluate_from_file : q_js_engine -> string -> string = "qjs_ml_eval_from_file"
 
+  external set_property : q_js_engine -> string -> string -> unit = "qjs_ml_set_property"
+
 end
 
-(** A virtual machine creates a JavaScript execution environment. *)
+exception JavaScript_eval_exn of {reason : string;
+                                  line_number: int;
+                                  stack : string;}
+
+let () =
+  Callback.register_exception
+    "eval_exn"
+    (JavaScript_eval_exn {reason = ""; line_number = 0; stack = ""})
+
 class virtual_machine = object
-
   val ptr = Bindings.init ()
-
-  (** Evaluate the given JavaScript script and result back the result
-      as if calling toString on the result *)
   method eval = Bindings.evaluate ptr
-
-  (** Evaluate the given JavaScript file and result back the last
-      evaluated expression as a string *)
   method load_from_file = Bindings.evaluate_from_file ptr
-
-  (** Runs the garbage collector in the JavaScript environment *)
   method garbage_collect = Bindings.garbage_collect ptr
+  method set_global_property prop_name prop_value =
+    Bindings.set_property ptr prop_name prop_value
 
 end
