@@ -1,4 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: cfae0b2fe388d14006f12b90563415f5)
+# DO NOT EDIT (digest: 50975b631c7f3e4b74835e7d1a610757)
 qjsengine_stubs.o
+qjsengine_values.o
 # OASIS_STOP

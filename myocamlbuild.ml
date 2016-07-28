@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 0abf942deef411fcbf7538e10b3a63a8) *)
+(* DO NOT EDIT (digest: dc65aa3a70e0469340c3915c8d6063ef) *)
 module OASISGettext = struct
 (* # 22 "src/oasis/OASISGettext.ml" *)
 
@@ -768,7 +768,7 @@ open Ocamlbuild_plugin;;
 let package_default =
   {
      MyOCamlbuildBase.lib_ocaml = [("qjsengine", ["src"], [])];
-     lib_c = [("qjsengine", "src", [])];
+     lib_c = [("qjsengine", "src", ["src/qjsengine_values.h"])];
      flags =
        [
           (["oasis_library_qjsengine_ccopt"; "compile"],
@@ -790,7 +790,31 @@ let package_default =
                       A "-ccopt";
                       A "-fPIC";
                       A "-ccopt";
-                      A "-stdlib=libc++"
+                      A "-stdlib=libc++";
+                      A "-ccopt";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-ccopt";
+                      A "-framework";
+                      A "-ccopt";
+                      A "QtCore";
+                      A "-ccopt";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-ccopt";
+                      A "-framework";
+                      A "-ccopt";
+                      A "QtQml";
+                      A "-ccopt";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-ccopt";
+                      A "-framework";
+                      A "-ccopt";
+                      A "QtNetwork";
+                      A "-ccopt";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-ccopt";
+                      A "-framework";
+                      A "-ccopt";
+                      A "QtCore"
                    ]);
                (OASISExpr.ENot (OASISExpr.ETest ("system", "macosx")),
                  S
@@ -805,6 +829,59 @@ let package_default =
                       A "-fPIC";
                       A "-ccopt";
                       A "-stdlib=libc++"
+                   ])
+            ]);
+          (["oasis_library_qjsengine_cclib"; "link"],
+            [
+               (OASISExpr.EBool true,
+                 S
+                   [
+                      A "-cclib";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-cclib";
+                      A "-framework";
+                      A "-cclib";
+                      A "QtCore";
+                      A "-cclib";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-cclib";
+                      A "-framework";
+                      A "-cclib";
+                      A "QtQml";
+                      A "-cclib";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-cclib";
+                      A "-framework";
+                      A "-cclib";
+                      A "QtNetwork";
+                      A "-cclib";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-cclib";
+                      A "-framework";
+                      A "-cclib";
+                      A "QtCore";
+                      A "-cclib";
+                      A "-lc++"
+                   ])
+            ]);
+          (["oasis_library_qjsengine_cclib"; "ocamlmklib"; "c"],
+            [
+               (OASISExpr.EBool true,
+                 S
+                   [
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-framework";
+                      A "QtCore";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-framework";
+                      A "QtQml";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-framework";
+                      A "QtNetwork";
+                      A "-F/usr/local/Cellar/qt5/5.6.1-1/lib";
+                      A "-framework";
+                      A "QtCore";
+                      A "-lc++"
                    ])
             ]);
           (["oasis_library_qjsengine_byte"; "ocaml"; "link"; "byte"],
@@ -836,9 +913,39 @@ let package_default =
             [
                (OASISExpr.EBool true,
                  S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_byte"; "ocaml"; "link"; "byte"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_native"; "ocaml"; "link"; "native"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_byte"; "ocaml"; "ocamldep"; "byte"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_native"; "ocaml"; "ocamldep"; "native"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_byte"; "ocaml"; "compile"; "byte"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
+            ]);
+          (["oasis_executable_server_native"; "ocaml"; "compile"; "native"],
+            [
+               (OASISExpr.EBool true,
+                 S [A "-g"; A "-w"; A "+a-4-40..42-44-45-48"])
             ])
        ];
-     includes = []
+     includes = [("examples", ["src"])]
   }
   ;;
 
@@ -846,7 +953,7 @@ let conf = {MyOCamlbuildFindlib.no_automatic_syntax = false}
 
 let dispatch_default = MyOCamlbuildBase.dispatch_default conf package_default;;
 
-# 850 "myocamlbuild.ml"
+# 957 "myocamlbuild.ml"
 (* OASIS_STOP *)
 Ocamlbuild_plugin.dispatch dispatch_default;;
 
