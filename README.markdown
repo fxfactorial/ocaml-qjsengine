@@ -3,7 +3,7 @@ Control a JavaScript execution environment in OCaml
 
 These are OCaml bindings to
 [QJSEngine](http://doc.qt.io/qt-5/qjsengine.html), aka Qt's own
-JavaScript engine.
+JavaScript engine based off of Google's Blink engine.
 
 Why
 ===
