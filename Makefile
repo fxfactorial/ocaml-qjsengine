@@ -1,8 +1,3 @@
-
-export PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig
-
-
-
 # OASIS_START
 # DO NOT EDIT (digest: a3c674b4239234cbbe53afe090018954)
 
@@ -44,3 +39,10 @@ configure:
 .PHONY: build doc test all install uninstall reinstall clean distclean configure
 
 # OASIS_STOP
+ccopts := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --cflags /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)
+cclibs := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --libs /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)
+
+prepare_oasis:
+	sed -i '' -e 's|$${ccopts}|${ccopts}|' _oasis
+	sed -i '' -e 's|$${cclibs}|${cclibs}|' _oasis
+

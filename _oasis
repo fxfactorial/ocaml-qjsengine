@@ -17,13 +17,8 @@ Library qjsengine
   Path: src
   Modules: QJSEngine
   install: true
-  if system(macosx)
-    CCOpt: -g -Wall -std=c++14 -x c++ -fPIC -stdlib=libc++ -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtCore -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtQml -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtNetwork -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtCore
-  else
-    CCOpt: -std=c++11 -x c++ -fPIC -stdlib=libc++
-
-  CClib: -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtCore -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtQml -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtNetwork -F/usr/local/Cellar/qt5/5.6.1-1/lib -framework QtCore -lc++
-
+  CCOpt: -g -Wall -std=c++11 -x c++ -stdlib=libc++ ${ccopts}
+  CClib: -lc++ ${cclibs}
   NativeOpt: -g -w +a-4-40..42-44-45-48
   ByteOpt: -g -w +a-4-40..42-44-45-48
   CSources:
