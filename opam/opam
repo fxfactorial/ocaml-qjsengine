@@ -1,0 +1,46 @@
+# -*- conf -*-
+opam-version: "1.2"
+name: "qjsengine"
+version: "0.0.1"
+maintainer: "Edgar Aroutiounian <edgar.factorial@gmail.com>"
+authors: [ "Edgar Aroutiounian <edgar.factorial@gmail.com>" ]
+license: "BSD-3-clause"
+homepage: "https://github.com/fxfactorial/ocaml-qjsengine"
+dev-repo: "https://github.com/fxfactorial/ocaml-qjsengine.git"
+bug-reports: "https://github.com/fxfactorial/ocaml-qjsengine/issues"
+tags: [ "clib:c"  ]
+build: [
+  ["make" "prepare_oasis"]
+  ["oasis" "setup"]
+  ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
+  ["ocaml" "setup.ml" "-build"]
+]
+install: ["ocaml" "setup.ml" "-install"]
+remove: [
+  ["ocamlfind" "remove" "qjsengine"]
+]
+depexts: [
+  [["darwin"] ["qt5"]]
+  # [["ubuntu"] ["usbmuxd"]]
+]
+build-test: [
+  ["oasis" "setup"]
+  ["ocaml" "setup.ml" "-configure" "--enable-tests"]
+  ["ocaml" "setup.ml" "-build"]
+  ["ocaml" "setup.ml" "-test"]
+]
+build-doc: [ "ocaml" "setup.ml" "-doc" ]
+depends: [
+  "oasis" {build & >= "0.4"}
+  "ocamlbuild" {build}
+  "ocamlfind" {build}
+]
+messages:[
+ "Evaluate and control JavaScript values/scripts from within OCaml"
+]
+
+post-messages:[
+"Installation might fail because of a lack of Qt5, follow depext's instructions \
+and if that fails then open a github issue."
+]
+available: [ ocaml-version >= "4.03.0" ]
