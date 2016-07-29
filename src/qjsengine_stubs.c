@@ -109,4 +109,33 @@ extern "C" {
     CAMLreturn(Val_unit);
   }
 
+  // Now JSValue stuff
+
+  CAMLprim value
+  qjs_ml_jsvalue_init(value __attribute__((unused)))
+  {
+    CAMLparam0();
+    CAMLlocal1(res);
+
+    DEBUG("Created JSValue");
+
+    res = caml_alloc_custom(&caml_qjsengine_jsvalue_custom_ops,
+  			    sizeof(QJSValue),
+  			    1,
+  			    sizeof(QJSValue));
+    new(Data_custom_val(res))QJSValue;
+    CAMLreturn(res);
+  }
+
+  CAMLprim value
+  qjs_ml_jsvalue_is_bool(value jsvalue_ptr)
+  {
+    CAMLparam1(jsvalue_ptr);
+    DEBUG("Checking if value is bool");
+
+    QJSValue *v = (QJSValue*)Data_custom_val(jsvalue_ptr);
+
+    CAMLreturn(Bool_val(v->isBool()));
+  }
+
 }

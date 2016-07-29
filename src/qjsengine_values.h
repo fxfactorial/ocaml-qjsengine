@@ -30,5 +30,6 @@ const std::string current_date_time();
 #endif
 
 extern struct custom_operations caml_qjsengine_vm_custom_ops;
+extern struct custom_operations caml_qjsengine_jsvalue_custom_ops;
 
 #endif

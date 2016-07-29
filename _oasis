@@ -17,7 +17,7 @@ Library qjsengine
   Path: src
   Modules: QJSEngine
   install: true
-  CCOpt: -g -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined-trap -fsanitize-undefined-trap-on-error -std=c++11 -x c++ -stdlib=libc++ ${ccopts}
+  CCOpt: -g -Wall -Wextra -std=c++11 -x c++ -stdlib=libc++ ${ccopts}
   CClib: -lc++ ${cclibs}
   NativeOpt: -g -w +a-4-40..42-44-45-48
   ByteOpt: -g -w +a-4-40..42-44-45-48

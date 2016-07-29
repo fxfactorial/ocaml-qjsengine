@@ -40,6 +40,8 @@ configure:
 
 # OASIS_STOP
 
+# flags := -g -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined-trap -fsanitize-undefined-trap-on-error -std=c++11 -x c++ -stdlib=libc++
+
 # On OS X can assume this since depext should have fixed it for us.
 ccopts := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --cflags /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)
 cclibs := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --libs /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)

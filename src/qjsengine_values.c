@@ -15,11 +15,14 @@
 #include "qjsengine_values.h"
 
 char qjs_engine_identifier[] = "qjsengine.vm";
+char qjs_jsvalue_identifier[] = "qjsengine.jsvalue";
 
 static void
 qjs_ml_vm_finalize(value qjs)
 {
   QJSEngine *eng = (QJSEngine*)Data_custom_val(qjs);
+  DEBUG("Freeing up QJSEngine memory");
+
   eng->~QJSEngine();
 }
 
@@ -33,6 +36,27 @@ caml_qjsengine_vm_custom_ops = {
   custom_deserialize_default,
   custom_compare_ext_default
 };
+
+static void
+qjs_ml_jsvalue_finalize(value qjs_value)
+{
+  QJSValue *v = (QJSValue*)Data_custom_val(qjs_value);
+  DEBUG("Freeing up JSValue memory");
+
+  v->~QJSValue();
+}
+
+struct custom_operations
+caml_qjsengine_jsvalue_custom_ops = {
+  qjs_jsvalue_identifier,
+  qjs_ml_jsvalue_finalize,
+  custom_compare_default,
+  custom_hash_default,
+  custom_serialize_default,
+  custom_deserialize_default,
+  custom_compare_ext_default
+};
+
 
 // CAMLprim value
 // Val_some(value v)

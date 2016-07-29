@@ -21,7 +21,8 @@ remove: [
 ]
 depexts: [
   [["darwin"] ["qt5"]]
-  # [["ubuntu"] ["usbmuxd"]]
+  [["source" "ubuntu"] []
+  ]
 ]
 build-test: [
   ["oasis" "setup"]

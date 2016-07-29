@@ -1,4 +1,3 @@
-
 let () =
   let force () =
     let a = new QJSEngine.virtual_machine in
@@ -20,3 +19,8 @@ let () =
   let vm = new QJSEngine.virtual_machine in
   vm#set_global_property "name" "Edgar";
   vm#eval "this.name" |> print_endline
+
+let () =
+  let value = new QJSEngine.jsvalue () in
+  Printf.sprintf "is bool %s" (if value#is_bool then "yes" else "no")
+  |> print_endline
