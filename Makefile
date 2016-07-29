@@ -40,11 +40,23 @@ configure:
 
 # OASIS_STOP
 
-# flags := -g -Wall -Wextra -fsanitize=address -fno-omit-frame-pointer -fsanitize=undefined-trap -fsanitize-undefined-trap-on-error -std=c++11 -x c++ -stdlib=libc++
+os := $(shell uname -s)
+osx_path := /usr/local/opt/qt5/lib/pkgconfig
 
-# On OS X can assume this since depext should have fixed it for us.
-ccopts := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --cflags /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)
-cclibs := $(shell PKG_CONFIG_PATH=/usr/local/opt/qt5/lib/pkgconfig pkg-config --libs /usr/local/opt/qt5/lib/pkgconfig/Qt5Core.pc /usr/local/opt/qt5/lib/pkgconfig/Qt5Qml.pc)
+trusty_path := /opt/qt57/lib/pkgconfig
+
+ifeq (${os}, Darwin)
+  ccopts := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
+--cflags ${osx_path}/Qt5Core.pc ${osx_path}/Qt5Qml.pc)
+
+  cclibs := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
+--libs ${osx_path}/Qt5Core.pc ${osx_path}/Qt5Qml.pc)
+else
+  ccopts := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
+--cflags ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
+  cclibs := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
+--libs ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
+endif
 
 prepare_oasis:
 	@sed -i '' -e 's|$${ccopts}|${ccopts}|' _oasis
