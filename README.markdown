@@ -113,3 +113,30 @@ class virtual_machine : object
   method set_global_property : string -> string -> unit
 end
 ```
+
+
+Building
+=========
+
+I have tried to make this as smooth as possible to build. 
+
+# OS X
+
+```shell
+$ make prepare_oasis
+$ make
+```
+
+plain `make` works after that.
+
+# Linux
+
+
+```shell
+$ make prepare_oasis
+$ bash prepare_environment.sh
+$ PATH=$(pwd)/path_dir:${PATH} make
+```
+
+use `PATH=$(pwd)/path_dir:${PATH} make` to build the project after
+this sequence.
