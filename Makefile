@@ -1,3 +1,4 @@
+# -*- makefile -*-
 # OASIS_START
 # DO NOT EDIT (digest: a3c674b4239234cbbe53afe090018954)
 
@@ -42,7 +43,6 @@ configure:
 
 os := $(shell uname -s)
 osx_path := /usr/local/opt/qt5/lib/pkgconfig
-
 trusty_path := /opt/qt57/lib/pkgconfig
 
 ifeq (${os}, Darwin)
@@ -51,14 +51,21 @@ ifeq (${os}, Darwin)
 
   cclibs := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
 --libs ${osx_path}/Qt5Core.pc ${osx_path}/Qt5Qml.pc)
+
+prepare_oasis:
+	@sed -i.bak -e 's|$${ccopts}|${ccopts}|' _oasis
+	@sed -i.bak -e 's|$${cclibs}|${cclibs}|' _oasis
 else
+
   ccopts := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
 --cflags ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
 
   cclibs := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
 --libs ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
-endif
 
 prepare_oasis:
 	@sed -i.bak -e 's|$${ccopts}|${ccopts}|' _oasis
-	@sed -i.bak -e 's|$${cclibs}|${cclibs}|' _oasis
+	@sed -i.bak -e 's|$${cclibs}|-Wl,-rpath,/opt/qt57/lib ${cclibs}|' _oasis
+
+endif
+
