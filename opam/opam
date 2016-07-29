@@ -32,17 +32,28 @@ build-test: [
   ["ocaml" "setup.ml" "-test"]
 ]
 build-doc: [ "ocaml" "setup.ml" "-doc" ]
+
 depends: [
   "oasis" {build & >= "0.4"}
   "ocamlbuild" {build}
   "ocamlfind" {build}
 ]
+
+available: [ ocaml-version >= "4.03.0" ]
+
 messages:[
- "Evaluate and control JavaScript values/scripts from within OCaml"
+  "Evaluate and control JavaScript values/scripts from within OCaml"
+  "Installation might fail because of a lack of Qt5, follow depext's instructions"
+  "and if that fails then open a github issue."
 ]
 
 post-messages:[
-"Installation might fail because of a lack of Qt5, follow depext's instructions \
-and if that fails then open a github issue."
+  "Now you can control JavaScript from within OCaml"
+  "
+let () =
+  let vm = new QJSEngine.virtual_machine in
+  vm#set_global_property \"name\" \"Hello World\";
+  vm#eval \"this.name\" |> print_endline (* prints Hello World *)
+"
+  {success}
 ]
-available: [ ocaml-version >= "4.03.0" ]
