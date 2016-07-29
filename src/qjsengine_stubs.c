@@ -23,9 +23,13 @@
 
 static QCoreApplication *dummy_app;
 
+/* Qt library requires that QCoreApplication at a minimum be
+   created, so take that hassle off the library's users. */
 __attribute__((constructor))
 void init_qt(void)
 {
+  DEBUG("Initialize QCoreApplication in bindings");
+
   int argc = 1;
   char *argv[] = {(char*)"qjsengine_stubs.dummy_app"};
   dummy_app = new QCoreApplication(argc, argv);
@@ -38,6 +42,7 @@ extern "C" {
   {
     CAMLparam0();
     CAMLlocal1(res);
+    DEBUG("Creating a new QJSEngine");
 
     res = caml_alloc_custom(&caml_qjsengine_vm_custom_ops,
 			    sizeof(QJSEngine),
@@ -111,7 +116,6 @@ extern "C" {
   qjs_ml_set_property(value engine_ptr, value propname, value propvalue)
   {
     CAMLparam3(engine_ptr, propname, propvalue);
-
     DEBUG("Setting property on global object");
 
     QJSEngine *handle = (QJSEngine*)Data_custom_val(engine_ptr);
@@ -127,7 +131,6 @@ extern "C" {
   {
     CAMLparam0();
     CAMLlocal1(res);
-
     DEBUG("Created JSValue");
 
     res = caml_alloc_custom(&caml_qjsengine_jsvalue_custom_ops,
