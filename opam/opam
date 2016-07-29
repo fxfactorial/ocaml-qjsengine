@@ -11,9 +11,8 @@ bug-reports: "https://github.com/fxfactorial/ocaml-qjsengine/issues"
 tags: [ "clib:c"  ]
 build: [
   ["make" "prepare_oasis"]
-  ["oasis" "setup"]
   ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
-  ["ocaml" "setup.ml" "-build"]
+  ["make" "build_project"]
 ]
 install: ["ocaml" "setup.ml" "-install"]
 remove: [
@@ -45,6 +44,7 @@ messages:[
   "Evaluate and control JavaScript values/scripts from within OCaml"
   "Installation might fail because of a lack of Qt5, follow depext's instructions"
   "and if that fails then open a github issue."
+  {success}
 ]
 
 post-messages:[

@@ -71,3 +71,7 @@ endif
 prepare_oasis:
 	@sed -i.bak -e 's|$${ccopts}|${ccopts_extras} ${ccopts}|' _oasis
 	@sed -i.bak -e 's|$${cclibs}|${cclibs_extras} ${cclibs}|' _oasis
+
+build_project:
+	oasis setup
+	bash prepare_env_and_build.sh
