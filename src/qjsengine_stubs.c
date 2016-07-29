@@ -4,6 +4,7 @@
 
 #include <QJSEngine>
 #include <QDebug>
+#include <QtCore>
 
 // OCaml declarations
 #include <caml/mlvalues.h>
@@ -19,6 +20,16 @@
 #include <sstream>
 
 #include "qjsengine_values.h"
+
+static QCoreApplication *dummy_app;
+
+__attribute__((constructor))
+void init_qt(void)
+{
+  int argc = 1;
+  char *argv[] = {(char*)"qjsengine_stubs.dummy_app"};
+  dummy_app = new QCoreApplication(argc, argv);
+}
 
 extern "C" {
 
