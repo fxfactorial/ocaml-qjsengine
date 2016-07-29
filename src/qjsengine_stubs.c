@@ -142,6 +142,21 @@ extern "C" {
   }
 
   CAMLprim value
+  qjs_ml_jsvalue_with_string(value ml_string)
+  {
+    CAMLparam1(ml_string);
+    CAMLlocal1(res);
+    DEBUG("Creating JSValue with a ML string");
+
+    res = caml_alloc_custom(&caml_qjsengine_jsvalue_custom_ops,
+  			    sizeof(QJSValue),
+  			    1,
+  			    sizeof(QJSValue));
+    new(Data_custom_val(res))QJSValue(caml_strdup(String_val(ml_string)));
+    CAMLreturn(res);
+  }
+
+  CAMLprim value
   qjs_ml_jsvalue_is_bool(value jsvalue_ptr)
   {
     CAMLparam1(jsvalue_ptr);

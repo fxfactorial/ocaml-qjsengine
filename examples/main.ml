@@ -25,3 +25,18 @@ let () =
 (*   let value = new QJSEngine.jsvalue () in *)
 (*   Printf.sprintf "is bool %s" (if value#is_bool then "yes" else "no") *)
 (*   |> print_endline *)
+
+(* let () = *)
+(*   let value = *)
+(*     new QJSEngine.jsvalue ~with_value:(String "Hello World") () *)
+(*   in *)
+(*   Printf.sprintf "is bool %s" (if value#is_bool then "yes" else "no") *)
+(*   |> print_endline *)
+
+let () =
+  let module JSArray = QJSEngine.Make(struct
+                                       
+                           
+                                     end)
+  in
+  ()

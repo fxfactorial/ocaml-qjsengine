@@ -10,8 +10,8 @@ exception JavaScript_eval_exn of { reason : string;
                                    stack : string; }
 
 (** Different OCaml values you can use to create a new {b jsvalue} *)
-type init_t =
-    String of string | Int of int | Float of float | Bool of bool
+(* type init_t = *)
+(*   String of string | Int of int | Float of float | Bool of bool *)
 
 (** A virtual machine creates a JavaScript execution environment,
     evaluating JavaScript code can raises exceptions when the
@@ -33,11 +33,17 @@ class virtual_machine : object
       machine. This global value will be visible to the scripts
       evaluated in this virtual machine *)
   method set_global_property : string -> string -> unit
+
+  (** Create a new JavaScript Array *)
+  (* method new_array : ?size:int -> jsvalue *)
+
 end
 
-and jsvalue : ?with_value:init_t -> unit ->
-  object
+(* and jsvalue : ?with_value:init_t -> unit -> *)
+(*   object *)
 
-    method is_bool : bool
+(*     method is_bool : bool *)
 
-  end
+(*     method unsafe_set : 'a. 'a -> unit *)
+
+(*   end *)
