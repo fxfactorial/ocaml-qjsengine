@@ -21,7 +21,9 @@ remove: [
 ]
 depexts: [
   [["darwin"] ["qt5"]]
-  [["source" "linux"] ["https://raw.githubusercontent.com/fxfactorial/ocaml-qjsengine/master/opam_ppa_script.sh"]  ]
+  [["source" "linux"]
+  ["https://raw.githubusercontent.com/fxfactorial/ocaml-qjsengine/master/opam_ppa_script.sh"]
+  ]
 ]
 build-test: [
   ["oasis" "setup"]

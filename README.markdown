@@ -18,18 +18,28 @@ different payload with ReactJS.
 Installation
 ==============
 
-At the moment the build only works on `OS X` and can be done via:
+At the moment the build is known to work on `OS X` and Ubuntu
+Trusty. You can install with:
 
 ```shell
 $ opam pin add -y qjsengine git@github.com:fxfactorial/ocaml-qjsengine.git
 ```
 
 You'll need `qt5` installed, very easy with `brew install qt5` and
-opam's external depedency handler, `dep-ext`, should take care of it
+opam's external depedency handler, `depext`, should take care of it
 for you.
 
-Getting this to work on Linux is pretty straightforward, just have to
-spend some time with the build system.
+If you're on Ubuntu trusty then simply doing: 
+
+```shell
+$ opam depext qjsengine
+```
+
+Should install the appropriate Qt libraries, note this will use a
+`ppa` and install `Qt5.7`.
+
+For other versions of Ubuntu look at
+[this](https://launchpad.net/~beineri) ppa for Qt5 installation.
 
 Examples
 =========
