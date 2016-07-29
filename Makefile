@@ -73,5 +73,5 @@ prepare_oasis:
 	@sed -i.bak -e 's|$${cclibs}|${cclibs_extras} ${cclibs}|' _oasis
 
 build_project:
-	oasis setup
+	oasis setup -setup-update dynamic
 	bash prepare_env_and_build.sh
