@@ -52,9 +52,8 @@ ifeq (${os}, Darwin)
   cclibs := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
 --libs ${osx_path}/Qt5Core.pc ${osx_path}/Qt5Qml.pc)
 
-prepare_oasis:
-	@sed -i.bak -e 's|$${ccopts}|${ccopts}|' _oasis
-	@sed -i.bak -e 's|$${cclibs}|${cclibs}|' _oasis
+  ccopts_extras :=
+  cclibs_extras :=
 else
 
   ccopts := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
@@ -63,9 +62,11 @@ else
   cclibs := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
 --libs ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
 
-prepare_oasis:
-	@sed -i.bak -e 's|$${ccopts}|${ccopts}|' _oasis
-	@sed -i.bak -e 's|$${cclibs}|-Wl,-rpath,/opt/qt57/lib ${cclibs}|' _oasis
+  ccopts_extras :=
+  cclibs_extras := -Wl,-rpath,/opt/qt57/lib
 
 endif
 
+prepare_oasis:
+	@sed -i.bak -e 's|$${ccopts}|${ccopts_extras} ${ccopts}|' _oasis
+	@sed -i.bak -e 's|$${cclibs}|${cclibs_extras} ${cclibs}|' _oasis
