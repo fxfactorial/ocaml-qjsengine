@@ -54,10 +54,11 @@ ifeq (${os}, Darwin)
 else
   ccopts := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
 --cflags ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
-  cclibs := $(shell PKG_CONFIG_PATH=${osx_path} pkg-config \
+
+  cclibs := $(shell PKG_CONFIG_PATH=${trusty_path} pkg-config \
 --libs ${trusty_path}/Qt5Core.pc ${trusty_path}/Qt5Qml.pc)
 endif
 
 prepare_oasis:
-	@sed -i '' -e 's|$${ccopts}|${ccopts}|' _oasis
-	@sed -i '' -e 's|$${cclibs}|${cclibs}|' _oasis
+	@sed -i.bak -e 's|$${ccopts}|${ccopts}|' _oasis
+	@sed -i.bak -e 's|$${cclibs}|${cclibs}|' _oasis

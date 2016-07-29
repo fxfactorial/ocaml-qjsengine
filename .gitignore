@@ -12,3 +12,4 @@ _build
 api.docdir
 _tests/*
 .tern-port
+*.bak
