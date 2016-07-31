@@ -8,29 +8,35 @@ license: "BSD-3-clause"
 homepage: "https://github.com/fxfactorial/ocaml-qjsengine"
 dev-repo: "https://github.com/fxfactorial/ocaml-qjsengine.git"
 bug-reports: "https://github.com/fxfactorial/ocaml-qjsengine/issues"
-tags: [ "clib:c"  ]
+tags: [ "clib:c"  "JavaScript" "EcmaScript" "QJSEngine"]
+
 build: [
   ["make" "prepare_oasis"]
-  ["oasis" "setup"]
   ["ocaml" "setup.ml" "-configure" "--prefix" prefix]
-  ["ocaml" "setup.ml" "-build"]
+  ["make" "build_project"]
 ]
+
 install: ["ocaml" "setup.ml" "-install"]
+
 remove: [
   ["ocamlfind" "remove" "qjsengine"]
 ]
+
 depexts: [
   [["darwin"] ["qt5"]]
+  [["ubuntu"] ["clang" "libc++-dev"]]
+  [["debian"] ["clang" "libc++-dev"]]
   [["source" "linux"]
   ["https://raw.githubusercontent.com/fxfactorial/ocaml-qjsengine/master/opam_ppa_script.sh"]
   ]
 ]
+
 build-test: [
-  ["oasis" "setup"]
+  ["make" "build_project"]
   ["ocaml" "setup.ml" "-configure" "--enable-tests"]
-  ["ocaml" "setup.ml" "-build"]
   ["ocaml" "setup.ml" "-test"]
 ]
+
 build-doc: [ "ocaml" "setup.ml" "-doc" ]
 
 depends: [

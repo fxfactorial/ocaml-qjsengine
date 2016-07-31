@@ -9,10 +9,6 @@ exception JavaScript_eval_exn of { reason : string;
                                    line_number : int;
                                    stack : string; }
 
-(** Different OCaml values you can use to create a new {b jsvalue} *)
-type init_t =
-    String of string | Int of int | Float of float | Bool of bool
-
 (** A virtual machine creates a JavaScript execution environment,
     evaluating JavaScript code can raises exceptions when the
     JavaScript itself raises an exception *)
@@ -34,10 +30,3 @@ class virtual_machine : object
       evaluated in this virtual machine *)
   method set_global_property : string -> string -> unit
 end
-
-and jsvalue : ?with_value:init_t -> unit ->
-  object
-
-    method is_bool : bool
-
-  end
